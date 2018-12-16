@@ -1,0 +1,56 @@
+//
+//  ViewController.swift
+//  AutLayout練習
+//
+//  Created by 伊藤 剛 on 2018/12/16.
+//  Copyright © 2018年 dw-test02. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+
+    
+    @IBOutlet var f_view: UIView!
+    
+    @IBOutlet var s_view: UIView!
+    @IBOutlet var s_viewConstraint1: NSLayoutConstraint! //s_viewからのconst
+    @IBOutlet var s_viewConstraint2: NSLayoutConstraint! //上からのconst
+    
+    @IBOutlet var t_view: UIView!
+    
+    var hiden:Bool = false{
+        didSet{
+            print(hiden)
+            
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    @IBAction func tapBtn(_ sender: Any) {
+//        print("tap")
+        self.hiden = !self.hiden
+        self.f_view.isHidden = self.hiden
+//        https://qiita.com/shindooo/items/36d2e8bf9d8ba3fa4ed5
+//        s_view.topAnchor.constraint(equalTo: f_view.topAnchor).isActive = true
+        //hiddenになったら制約としては使えなくなる。　自分のアンカーは制約としてはつかえない。
+//        s_view.topAnchor.constraint(equalTo: f_view.topAnchor, constant: 10.0).isActive = true
+        //sale.view位置をアンカーに指定してconstするといいよね
+        s_view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 10.0).isActive = true
+
+    }
+    
+    @IBAction func tapBtn2(_ sender: Any) {
+        self.s_view.isHidden = true
+    }
+}
+
